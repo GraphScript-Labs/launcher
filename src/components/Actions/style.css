@@ -49,3 +49,16 @@
   opacity: 1;
 }
 
+.action[disabled] {
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+.action[disabled] .action-icon {
+  opacity: 0.1;
+}
+
+.action[disabled]:active .action-icon {
+  scale: 1;
+}
+

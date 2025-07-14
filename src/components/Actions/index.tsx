@@ -1,14 +1,22 @@
-import { Plus } from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
+import { GitPullRequestArrow, Plus } from "lucide-react";
 
 import type { ProjectData } from "../../defs/ProjectData";
 
-import { getData, openProject, storeData } from "../../utils/desktopTools";
 import { generateId } from "../../utils/generatorTools";
+import {
+  checkUpdates,
+  getData,
+  openProject,
+  storeData,
+  updateTools,
+} from "../../utils/desktopTools";
 
 import "./style.css";
 
 export function Actions() {
-  const openNewProject = () => {
+  const [updatesAvailable, setUpdatesAvailable] = useState(false);
+  const openNewProject = useCallback(() => {
     const projectId = generateId();
 
     const newProject: ProjectData = {
@@ -33,7 +41,24 @@ export function Actions() {
       
       location.reload();
     })();
-  };
+  }, []);
+
+  const startUpdate = useCallback(() => {
+    const message = [
+      "Are you sure you want to update the tools?",
+      "This will close the application.",
+      "You will need to start it again manually.",
+    ].join(" ");
+
+    if (!confirm(message)) return;
+    updateTools();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      setUpdatesAvailable(await checkUpdates());
+    })();
+  }, []);
 
   return (<>
     <div className="actions">
@@ -41,6 +66,17 @@ export function Actions() {
         <Plus className="action-icon" />
         <span className="action-name">
           New Project
+        </span>
+      </button>
+
+      <button
+        className="action"
+        onClick={startUpdate}
+        disabled={!updatesAvailable}
+      >
+        <GitPullRequestArrow className="action-icon" />
+        <span className="action-name">
+          Update Tools
         </span>
       </button>
     </div>

@@ -48,11 +48,29 @@ const setupDesktopTools = () => {
     return await getApi()?.store_data(data) || false;
   }
 
+  const getVersion = async (): Promise<string> => {
+    await waitForPWV();
+    return await getApi()?.get_version() || "v0";
+  }
+
+  const checkUpdates = async (): Promise<boolean> => {
+    await waitForPWV();
+    return await getApi()?.check_updates() || false;
+  }
+
+  const updateTools = async () => {
+    await waitForPWV();
+    return await getApi()?.update();
+  }
+
   return {
     closeWindow,
     openProject,
     getData,
     storeData,
+    getVersion,
+    checkUpdates,
+    updateTools,
   }
 };
 
@@ -61,5 +79,8 @@ export const {
   openProject,
   getData,
   storeData,
+  getVersion,
+  checkUpdates,
+  updateTools,
 } = setupDesktopTools();
 

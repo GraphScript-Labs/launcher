@@ -4,6 +4,9 @@ export interface PyWebview {
     open_project: (project_id: string) => Promise<void>;
     get_data: () => Promise<string>;
     store_data: (data: string) => Promise<boolean>;
+    get_version: () => Promise<string>;
+    check_updates: () => Promise<boolean>;
+    update: () => Promise<void>;
   }
 };
 

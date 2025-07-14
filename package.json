@@ -5,8 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "verlog": "date +%s > dist/version",
-    "build": "tsc -b && vite build && npm run verlog",
+    "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "start": "npm run dev"

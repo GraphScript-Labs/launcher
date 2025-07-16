@@ -1,10 +1,22 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { Tags } from "lucide-react";
+
 import { closeWindow, getVersion } from "../../utils/desktopTools";
 
 import "./style.css";
 
 export function AppBar() {
-  const [version, setVersion] = useState<string>("v0");
+  const [version, setVersion] = useState<{
+    [key: string]: string;
+  }>({});
+
+  const showVersions = useCallback(() => {
+    const versionMessage = Object.entries(version).map(
+      v => `${v[0]}: ${v[1]}`
+    ).join("\n");
+    
+    alert(versionMessage);
+  }, [version]);
 
   useEffect(() => {
     (async () => {
@@ -24,7 +36,7 @@ export function AppBar() {
       </div>
 
       <div className="version-info">
-        Launcher {version}
+        <Tags className="version-button" onClick={showVersions} />
       </div>
     </div>
   </>);

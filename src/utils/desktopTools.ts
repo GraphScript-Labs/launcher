@@ -48,9 +48,9 @@ const setupDesktopTools = () => {
     return await getApi()?.store_data(data) || false;
   }
 
-  const getVersion = async (): Promise<string> => {
+  const getVersion = async (): Promise<{[key: string]: string;}> => {
     await waitForPWV();
-    return await getApi()?.get_version() || "v0";
+    return await getApi()?.get_version() || {};
   }
 
   const checkUpdates = async (): Promise<boolean> => {

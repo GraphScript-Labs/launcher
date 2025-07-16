@@ -60,8 +60,24 @@
 }
 
 .version-info {
-  padding: 0.25rem;
+  padding: 1rem;
   font-size: 0.75rem;
   font-weight: 200;
+  pointer-events: all;
+}
+
+.version-button {
+  width: 1rem;
+  height: 1rem;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.version-button:hover {
+  opacity: 1;
+}
+
+.version-button:active {
+  transform: scale(0.5);
 }
 

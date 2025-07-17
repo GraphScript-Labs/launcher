@@ -55,9 +55,18 @@ export function Actions() {
   }, []);
 
   useEffect(() => {
-    (async () => {
-      setUpdatesAvailable(await checkUpdates());
-    })();
+    const checkForUpdates = async () => {
+      const canUpdate = await checkUpdates();
+      if (canUpdate) {
+        setUpdatesAvailable(true);
+      } else {
+        setTimeout(() => {
+          checkForUpdates();
+        }, 2000);
+      }
+    }
+    
+    checkForUpdates();
   }, []);
 
   return (<>

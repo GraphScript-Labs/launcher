@@ -13,7 +13,7 @@ export function AppBar() {
   const showVersions = useCallback(() => {
     const convertVersion = (v: string): string => {
       const timestamp: string = v.split("v")[1];
-      const date: Date = new Date(Number(timestamp));
+      const date: Date = new Date(Number(timestamp) * 1000);
 
       const year: string = (date.getFullYear()).toString().padStart(4, "0");
       const month: string = (date.getMonth() + 1).toString().padStart(2, "0");
@@ -23,7 +23,7 @@ export function AppBar() {
       const seconds: string = (date.getSeconds()).toString().padStart(2, "0");
 
       const dfVer = `v${year}.${month}.${day}.${hours}${minutes}${seconds}`;
-      const tsVer = `v${timestamp}`;
+      const tsVer = v;
 
       return `${dfVer} (${tsVer})`;
     };

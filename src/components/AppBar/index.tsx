@@ -23,9 +23,7 @@ export function AppBar() {
       const seconds: string = (date.getSeconds()).toString().padStart(2, "0");
 
       const dfVer = `v${year}.${month}.${day}.${hours}${minutes}${seconds}`;
-      const tsVer = v;
-
-      return `${dfVer} (${tsVer})`;
+      return `${dfVer}`;
     };
 
     const versionMessage = Object.entries(version).map(

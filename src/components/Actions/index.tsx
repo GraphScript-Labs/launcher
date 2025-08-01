@@ -1,14 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { GitPullRequestArrow, Plus } from "lucide-react";
 
-import type { ProjectData } from "../../defs/ProjectData";
-
-import { generateId } from "../../utils/generatorTools";
 import {
   checkUpdates,
-  getData,
-  openProject,
-  storeData,
   updateTools,
 } from "../../utils/desktopTools";
 
@@ -16,31 +10,12 @@ import "./style.css";
 
 export function Actions() {
   const [updatesAvailable, setUpdatesAvailable] = useState(false);
-  const openNewProject = useCallback(() => {
-    const projectId = generateId();
 
-    const newProject: ProjectData = {
-      id: projectId,
-      name: `Project ${projectId.toUpperCase()}`,
-    };
-
-    (async () => {
-      const launcherData = await getData();
-      if (!launcherData) return;
-      
-      const newLauncherData = {
-        ...launcherData,
-        projects: [
-          newProject,
-          ...launcherData.projects,
-        ]
-      };
-      
-      await storeData(JSON.stringify(newLauncherData));
-      await openProject(projectId);
-      
-      location.reload();
-    })();
+  const scrollNewProject = useCallback(() => {
+    document.getElementById("new-project")?.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+    });
   }, []);
 
   const startUpdate = useCallback(() => {
@@ -71,7 +46,7 @@ export function Actions() {
 
   return (<>
     <div className="actions">
-      <button className="action" onClick={openNewProject}>
+      <button className="action" onClick={scrollNewProject}>
         <Plus className="action-icon" />
         <span className="action-name">
           New Project

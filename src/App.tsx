@@ -1,5 +1,6 @@
 import { AppWindow } from "./components/AppWindow";
 import { Hero } from "./components/Hero";
+import { NewProject } from "./components/NewProject";
 import { Projects } from "./components/Projects";
 
 export function App() {
@@ -8,6 +9,7 @@ export function App() {
       <AppWindow>
         <Hero />
         <Projects />
+        <NewProject />
       </AppWindow>
     </div>
   </>);

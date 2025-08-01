@@ -3,7 +3,6 @@ import { GitPullRequestArrow, Plus } from "lucide-react";
 
 import {
   checkUpdates,
-  updateTools,
 } from "../../utils/desktopTools";
 
 import "./style.css";
@@ -18,15 +17,11 @@ export function Actions() {
     });
   }, []);
 
-  const startUpdate = useCallback(() => {
-    const message = [
-      "Are you sure you want to update the tools?",
-      "This will close the application.",
-      "You will need to start it again manually.",
-    ].join(" ");
-
-    if (!confirm(message)) return;
-    updateTools();
+  const scrollUpdate = useCallback(() => {
+    document.getElementById("install")?.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+    });
   }, []);
 
   useEffect(() => {
@@ -55,7 +50,7 @@ export function Actions() {
 
       <button
         className="action"
-        onClick={startUpdate}
+        onClick={scrollUpdate}
         disabled={!updatesAvailable}
       >
         <GitPullRequestArrow className="action-icon" />
